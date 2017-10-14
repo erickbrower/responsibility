@@ -1,4 +1,4 @@
-# Responsibility
+# Responsibility [![Build Status](https://travis-ci.org/erickbrower/responsibility.svg?branch=master)](https://travis-ci.org/erickbrower/responsibility)
 
 A Responsibility is a class that provides a single piece of functionality,
 as per the Single Responsibility Principle

@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
     provides a single method called "perform", with optional "before" and
     "after" hooks.
     HEREDOC
-  spec.homepage      = "http://erickbrower.com"
+  spec.homepage      = "http://github.com/erickbrower/responsibility"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
