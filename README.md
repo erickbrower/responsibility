@@ -1,8 +1,10 @@
 # Responsibility
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/responsibility`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A Responsibility is a class that provides a single piece of functionality,
+as per the Single Responsibility Principle
+[https://en.wikipedia.org/wiki/Single_responsibility_principle]. This class
+provides a single method called "perform", with optional "before" and
+"after" hooks. It also keeps track of any errors set during execution.
 
 ## Installation
 
@@ -22,7 +24,35 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+A simple example could be something like:
+
+```ruby
+class UserSignupService
+  include Responsibility
+
+  def before
+    unless user.present? && user.valid?
+      errors << "User was not provided or is not valid"
+    end
+  end
+
+  def perform
+    user.save
+  end
+
+  def after
+    UserConfirmationEmailService.perform(email: user.email)
+  end
+end
+
+user = User.new(
+  email: "cerickbrower@gmail.com",
+  password: "Wubba Lubba Dub Dub!"
+)
+result = UserSignupService.perform(user: user)
+
+```
+
 
 ## Development
 
@@ -32,4 +62,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/responsibility.
+Bug reports and pull requests are welcome on GitHub at https://github.com/erickbrower/responsibility.
