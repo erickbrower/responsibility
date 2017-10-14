@@ -9,18 +9,15 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Erick Brower"]
   spec.email         = ["cerickbrower@gmail.com"]
 
-  spec.summary       = %q{Create service objects adhereing to the SRP}
-  spec.description   = %q{Create service objects adhereing to the SRP}
+  spec.summary       = %q{Provides an interface for creating single purpose objects}
+  spec.description   = <<~HEREDOC
+    A Responsibility is a class that provides a single piece of functionality,
+    as per the Single Responsibility Principle
+    [https://en.wikipedia.org/wiki/Single_responsibility_principle]. This class
+    provides a single method called "perform", with optional "before" and
+    "after" hooks.
+    HEREDOC
   spec.homepage      = "http://erickbrower.com"
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
