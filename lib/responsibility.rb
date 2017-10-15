@@ -2,6 +2,7 @@ require "responsibility/version"
 require "responsibility/initializer"
 require "responsibility/instance_methods"
 require "responsibility/class_methods"
+require "responsibility/failure_error"
 
 module Responsibility
   def self.included(base)

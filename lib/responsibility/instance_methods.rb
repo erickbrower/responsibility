@@ -8,12 +8,8 @@ module Responsibility
       success == false
     end
 
-    def fail!
-      success = false
-    end
-
-    def succeed!
-      success = true
+    def fail!(message: nil)
+      raise FailureError.new(message)
     end
   end
 end

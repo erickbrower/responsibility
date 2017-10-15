@@ -1,41 +1,56 @@
+require 'pry'
+
 module Responsibility
   module ClassMethods
-    def before(obj)
-      if obj.respond_to?(:before)
-        result = obj.before
-        if obj.errors.any?
-          obj.instance_variable_set("@success", false)
-        else
-          obj.instance_variable_set("@success", !!result)
+    def before(service)
+      begin
+        if service.respond_to?(:before)
+          if !service.before || service.errors.any?
+            handle_failure(service: service)
+          end
         end
+      rescue FailureError => e
+        handle_failure(service: service, error: e)
       end
+      service.success?
     end
 
-    def after(obj)
-      if obj.respond_to?(:after)
-        result = obj.after
-        if obj.errors.any?
-          obj.instance_variable_set("@success", false)
-        else
-          obj.instance_variable_set("@success", !!result)
+    def after(service)
+      begin
+        if service.respond_to?(:after)
+          if !service.after || service.errors.any?
+            handle_failure(service: service)
+          end
         end
+      rescue FailureError => e
+        handle_failure(service: service, error: e)
       end
+      service.success?
     end
 
     def perform(*args)
       args = {} if args.is_a?(Array)
       service = new(args)
-      before(service)
-      if service.success?
-        service.perform
+      if before(service)
+        begin
+          service.perform
+          handle_failure(service: service) if service.errors.any?
+        rescue FailureError => e
+          handle_failure(service: service, error: e)
+        end
       end
-      if service.errors.any?
-        service.instance_variable_set("@success", false)
-      end
       if service.success?
-        after(service)
+        if !after(service) || service.errors.any?
+          handle_failure(service: service)
+        end
       end
       service
+    end
+
+    private
+    def handle_failure(service:, error: nil)
+      service.instance_variable_set("@success", false)
+      service.errors << error.message if error
     end
   end
 end
