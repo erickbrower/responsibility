@@ -72,7 +72,7 @@ result.success? #=> false
 result.errors #=> ["User was not provided or is not valid"]
 ```
 
-Another contrived example with an explicit failure:
+Another contrived example with an explicit failure, assuming the User object couldn't be persisted:
 ```ruby
 class UserSignupService
   include Responsibility
