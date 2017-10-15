@@ -1,3 +1,6 @@
+# Author:: Erick Brower  (mailto:cerickbrower@gmail.com)
+# License:: MIT
+
 require "responsibility/version"
 require "responsibility/initializer"
 require "responsibility/instance_methods"

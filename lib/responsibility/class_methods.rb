@@ -1,5 +1,3 @@
-require 'pry'
-
 module Responsibility
   module ClassMethods
     def before(service)
