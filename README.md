@@ -1,4 +1,4 @@
-# Responsibility [![Build Status](https://travis-ci.org/erickbrower/responsibility.svg?branch=master)](https://travis-ci.org/erickbrower/responsibility)
+# Responsibility [![Build Status](https://travis-ci.org/erickbrower/responsibility.svg?branch=master)](https://travis-ci.org/erickbrower/responsibility) [![Gem Version](https://badge.fury.io/rb/responsibility.svg)](https://badge.fury.io/rb/responsibility)
 
 A Responsibility is a class that provides a single piece of functionality,
 as per the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single_responsibility_principle). This class
